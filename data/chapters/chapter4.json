@@ -1,0 +1,133 @@
+{
+  "chapter": {
+    "id": "cap4",
+    "title": "Capítulo 4 — O Trono do Eclipse"
+  },
+  "scenes": {
+    "eclipse_bridge": {
+      "chapter": "cap4",
+      "checkpoint": true,
+      "title": "Ponte do Eclipse",
+      "text": "Uma ponte de pedra negra cruza um vazio sem fundo visível. Ao longe, um trono cercado por luz rachada espera como se já soubesse seu nome.",
+      "onEnter": {
+        "text": "Você entrou no capítulo final. Agora o jogo para de fingir educação."
+      },
+      "choices": [
+        {
+          "text": "Visitar o enclave do ferreiro exilado",
+          "next": "eclipse_enclave"
+        },
+        {
+          "text": "Avançar ao portão do eclipse",
+          "next": "eclipse_gate"
+        },
+        {
+          "text": "Respirar fundo e recuperar forças",
+          "effects": {
+            "hp": 3
+          },
+          "resultText": "Você recompôs parte do corpo e da coragem.",
+          "next": "eclipse_bridge"
+        }
+      ]
+    },
+    "eclipse_enclave": {
+      "chapter": "cap4",
+      "title": "Enclave do Ferreiro Exilado",
+      "text": "Um velho ferreiro mantém a última forja acesa na borda do abismo. Ele vende armas como quem vende soluções temporárias para problemas permanentes.",
+      "shop": {
+        "items": [
+          "tonico_heroico",
+          "pocao_maior",
+          "lamina_eclipse",
+          "egide_eclipse",
+          "amuleto_salvaguarda"
+        ],
+        "returnScene": "eclipse_bridge"
+      }
+    },
+    "eclipse_gate": {
+      "chapter": "cap4",
+      "title": "Portão do Eclipse",
+      "text": "A muralha final vibra em resposta ao Fragmento Abissal. Um colosso ergue-se para impedir sua passagem. Naturalmente.",
+      "choices": [
+        {
+          "text": "Enfrentar o colosso",
+          "requires": {
+            "flagFalse": "voidColossusDefeated",
+            "flag": "abyssShardTaken"
+          },
+          "combat": {
+            "enemyId": "void_colossus",
+            "victoryNext": "eclipse_throne"
+          }
+        },
+        {
+          "text": "Cruzar o portão aberto",
+          "requires": {
+            "flag": "voidColossusDefeated"
+          },
+          "next": "eclipse_throne"
+        },
+        {
+          "text": "Recuar para a ponte",
+          "next": "eclipse_bridge"
+        }
+      ]
+    },
+    "eclipse_throne": {
+      "chapter": "cap4",
+      "title": "Salão do Trono",
+      "text": "No centro do salão, o Rei do Eclipse aguarda em silêncio. O tipo de silêncio que vem antes de um problema enorme.",
+      "choices": [
+        {
+          "text": "Desafiar o Rei do Eclipse",
+          "requires": {
+            "flagFalse": "eclipseKingDefeated"
+          },
+          "combat": {
+            "enemyId": "eclipse_king",
+            "victoryNext": "ending_ascendant"
+          }
+        },
+        {
+          "text": "Reivindicar o trono silenciado",
+          "requires": {
+            "flag": "eclipseKingDefeated"
+          },
+          "next": "ending_ascendant"
+        },
+        {
+          "text": "Voltar ao portão",
+          "next": "eclipse_gate"
+        }
+      ]
+    },
+    "ending_ascendant": {
+      "chapter": "cap4",
+      "title": "Final: Ascensão sobre o Eclipse",
+      "text": "Com o rei derrotado, o Fragmento Abissal e o cristal entram em equilíbrio. O vale se estabiliza e seu nome atravessa as eras. Nada mal para alguém que começou comprando erva e tropeçando em caverna.",
+      "onEnter": {
+        "effects": {
+          "gold": 40,
+          "xp": 30,
+          "hp": 4,
+          "strength": 1,
+          "agility": 1,
+          "intellect": 1
+        },
+        "text": "Você recebeu uma recompensa digna do fim de uma saga e atributos extras para o próximo ciclo."
+      },
+      "choices": [
+        {
+          "text": "Iniciar novo ciclo (mundo mais difícil)",
+          "advanceCycle": true
+        },
+        {
+          "text": "Recomeçar a jornada mantendo progresso",
+          "restartRun": true
+        }
+      ]
+    }
+  }
+}

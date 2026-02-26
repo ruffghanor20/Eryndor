@@ -1,0 +1,212 @@
+{
+  "chapter": {
+    "id": "cap1",
+    "title": "Capítulo 1 — As Ruínas de Eryndor"
+  },
+  "scenes": {
+    "intro": {
+      "chapter": "cap1",
+      "checkpoint": true,
+      "title": "Portão de Eryndor",
+      "text": "O capitão pede sua ajuda: um cristal antigo foi roubado. Antes de partir, a praça oferece suprimentos, golpes de marketing e decisões questionáveis.",
+      "onEnter": {
+        "text": "Sua jornada começou. Ou pelo menos começou mal o suficiente para ser interessante."
+      },
+      "choices": [
+        { "text": "Ir para a praça do mercado", "next": "market_square" },
+        { "text": "Seguir direto para a floresta", "next": "forest_edge" },
+        { "text": "Recusar a missão", "next": "ending_quit" }
+      ]
+    },
+    "market_square": {
+      "chapter": "cap1",
+      "title": "Praça do Mercado",
+      "text": "Três barracas disputam seu ouro com uma agressividade admirável: o ferreiro, a alquimista e o vendedor de suprimentos.",
+      "choices": [
+        { "text": "Visitar o ferreiro", "next": "shop_blacksmith" },
+        { "text": "Visitar a alquimista", "next": "shop_alchemist" },
+        { "text": "Visitar o vendedor de suprimentos", "next": "shop_supplies" },
+        { "text": "Seguir para a floresta", "next": "forest_edge" },
+        { "text": "Voltar ao portão", "next": "intro" }
+      ]
+    },
+    "shop_blacksmith": {
+      "chapter": "cap1",
+      "title": "Ferraria",
+      "text": "Metal quente, marteladas e preços que fariam um orc pedir desconto com lágrimas nos olhos.",
+      "shop": {
+        "items": [
+          "espada_ferro",
+          "lanca_cacador",
+          "lamina_runica",
+          "couro_reforcado",
+          "cota_malha",
+          "armadura_guardiao"
+        ],
+        "returnScene": "market_square"
+      }
+    },
+    "shop_alchemist": {
+      "chapter": "cap1",
+      "title": "Tenda da Alquimista",
+      "text": "Frascos coloridos, cheiros duvidosos e promessas de desempenho que nenhum órgão regulador aprovaria.",
+      "shop": {
+        "items": [
+          "pocao",
+          "pocao_maior",
+          "elixir_forca_i",
+          "elixir_forca_ii",
+          "elixir_vigor_i",
+          "elixir_vigor_ii"
+        ],
+        "returnScene": "market_square"
+      }
+    },
+    "shop_supplies": {
+      "chapter": "cap1",
+      "title": "Barraca de Suprimentos",
+      "text": "Cordas, tochas e amuletos misteriosos. O vendedor parece honesto, o que por si só é alarmante.",
+      "shop": {
+        "items": [
+          "tocha",
+          "erva",
+          "amuleto_salvaguarda"
+        ],
+        "returnScene": "market_square"
+      }
+    },
+    "forest_edge": {
+      "chapter": "cap1",
+      "title": "Borda da Floresta",
+      "text": "A trilha se divide entre o rio e a caverna. O ar está úmido, e o silêncio parece acompanhar seus passos com juízo crítico.",
+      "choices": [
+        {
+          "text": "Coletar ervas na trilha",
+          "requires": { "flagFalse": "herbsTaken" },
+          "effects": {
+            "addItem": { "erva": 1 },
+            "setFlag": { "herbsTaken": true }
+          },
+          "resultText": "Você coletou 1 Erva.",
+          "next": "forest_edge"
+        },
+        { "text": "Ir até o rio", "next": "river" },
+        { "text": "Ir até a caverna", "next": "cave_entrance" },
+        { "text": "Voltar para a vila", "next": "ending_return" }
+      ]
+    },
+    "river": {
+      "chapter": "cap1",
+      "title": "Margem do Rio",
+      "text": "A água corre fria. Entre as pedras, algo reluz por um instante, como todo bom loot que quer ser encontrado dramaticamente.",
+      "choices": [
+        {
+          "text": "Procurar entre as pedras",
+          "requires": { "flagFalse": "riverLoot" },
+          "effects": {
+            "gold": 1,
+            "xp": 2,
+            "setFlag": { "riverLoot": true }
+          },
+          "resultText": "Você encontrou 1 moeda e aprendeu um pouco sobre o terreno.",
+          "next": "river"
+        },
+        {
+          "text": "Descansar junto à água",
+          "effects": { "hp": 1 },
+          "resultText": "Você recuperou um pouco de fôlego.",
+          "next": "river"
+        },
+        { "text": "Voltar para a trilha", "next": "forest_edge" }
+      ]
+    },
+    "cave_entrance": {
+      "chapter": "cap1",
+      "title": "Entrada da Caverna",
+      "text": "Runas gastas cobrem as pedras. Um rosnado curto ecoa de dentro, o que raramente indica um ambiente saudável.",
+      "choices": [
+        {
+          "text": "Acender a tocha e avançar",
+          "requires": { "item": "tocha", "flagFalse": "goblinDefeated" },
+          "effects": { "removeItem": { "tocha": 1 } },
+          "resultText": "A luz revela um pequeno guardião armado.",
+          "combat": { "enemyId": "goblin_guard", "victoryNext": "ruins_gate" }
+        },
+        {
+          "text": "Entrar no escuro",
+          "requires": { "flagFalse": "goblinDefeated" },
+          "effects": { "hp": -2 },
+          "resultText": "Você tropeça e entra ferido na luta.",
+          "combat": { "enemyId": "goblin_guard", "victoryNext": "ruins_gate" }
+        },
+        {
+          "text": "Seguir ao portão das ruínas",
+          "requires": { "flag": "goblinDefeated" },
+          "next": "ruins_gate"
+        },
+        { "text": "Voltar para a floresta", "next": "forest_edge" }
+      ]
+    },
+    "ruins_gate": {
+      "chapter": "cap1",
+      "title": "Portão das Ruínas",
+      "text": "Uma porta antiga, marcada por metal e inscrições, bloqueia o santuário interno. O arquiteto claramente odiava visitas.",
+      "choices": [
+        {
+          "text": "Usar a Chave Rúnica",
+          "requires": { "item": "chave_runica" },
+          "next": "inner_shrine"
+        },
+        { "text": "Voltar para a caverna", "next": "cave_entrance" }
+      ]
+    },
+    "inner_shrine": {
+      "chapter": "cap1",
+      "title": "Santuário Interior",
+      "text": "O cristal pulsa no centro da sala. O poder é real. A corrupção também. O pacote completo do problema clássico.",
+      "choices": [
+        { "text": "Tomar o cristal para si", "next": "ending_power" },
+        {
+          "text": "Selar o cristal com a Erva",
+          "requires": { "item": "erva" },
+          "effects": {
+            "removeItem": { "erva": 1 },
+            "setFlag": { "altarPurified": true },
+            "xp": 80
+          },
+          "resultText": "A energia do altar muda. Um novo caminho se abre ao norte.",
+          "next": "tower_path"
+        },
+        { "text": "Ir embora sem tocar em nada", "next": "ending_return" }
+      ]
+    },
+    "ending_power": {
+      "chapter": "cap1",
+      "title": "Final: Poder Roubado",
+      "text": "Você toma o cristal. A energia obedece, mas cobra um preço invisível. Você sai mais forte... e mais problemático.",
+      "onEnter": {
+        "effects": { "gold": 100, "xp": 6, "strength": 1 },
+        "text": "Você recebeu ouro, XP e um empurrão bruto de poder. Eticamente? Duvidoso."
+      },
+      "choices": [
+        { "text": "Iniciar novo ciclo (mundo mais difícil)", "advanceCycle": true }
+      ]
+    },
+    "ending_return": {
+      "chapter": "cap1",
+      "title": "Final: Retirada",
+      "text": "Você volta para a vila sem concluir a missão. Prudente? Talvez. Glorioso? Nem um pouco.",
+      "choices": [
+        { "text": "Reiniciar tentativa mantendo progresso", "restartRun": true }
+      ]
+    },
+    "ending_quit": {
+      "chapter": "cap1",
+      "title": "Final: Missão Recusada",
+      "text": "Você decide não se envolver. O mundo segue seu rumo. Sem glória, sem tragédia, só um silêncio meio burocrático.",
+      "choices": [
+        { "text": "Reiniciar tentativa mantendo progresso", "restartRun": true }
+      ]
+    }
+  }
+}

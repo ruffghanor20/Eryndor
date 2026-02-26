@@ -1,0 +1,517 @@
+{
+  "meta": {
+    "title": "RPG de Texto com Escolhas",
+    "version": "4.1 "
+  },
+  "classes": {
+    "warrior": {
+      "name": "Guerreiro",
+      "description": "Mais vida, mais pancada, menos conversa filosófica.",
+      "baseStats": {
+        "maxHp": 14,
+        "strength": 3,
+        "agility": 1,
+        "intellect": 1,
+        "gold": 5
+      },
+      "startingItems": {
+        "pocao": 1
+      },
+      "skills": [
+        "power_strike",
+        "guard_wall"
+      ]
+    },
+    "rogue": {
+      "name": "Ladino",
+      "description": "Crítico alto, fuga esperta, moral duvidosa.",
+      "baseStats": {
+        "maxHp": 10,
+        "strength": 2,
+        "agility": 3,
+        "intellect": 1,
+        "gold": 6
+      },
+      "startingItems": {
+        "erva": 1,
+        "pocao": 1
+      },
+      "skills": [
+        "quick_stab",
+        "vanish"
+      ]
+    },
+    "mage": {
+      "name": "Mago",
+      "description": "Dano mágico alto, pouca carne no osso. Um clássico arriscado.",
+      "baseStats": {
+        "maxHp": 9,
+        "strength": 1,
+        "agility": 1,
+        "intellect": 4,
+        "gold": 5
+      },
+      "startingItems": {
+        "pocao_maior": 1
+      },
+      "skills": [
+        "arcane_bolt",
+        "mana_ward"
+      ]
+    }
+  },
+  "skills": {
+    "power_strike": {
+      "name": "Golpe Brutal",
+      "description": "Ataque forte com multiplicador alto.",
+      "type": "attack",
+      "cooldown": 2,
+      "multiplier": 1.8
+    },
+    "guard_wall": {
+      "name": "Muralha",
+      "description": "Reduz drasticamente o próximo dano recebido.",
+      "type": "buff",
+      "cooldown": 3,
+      "effect": "shield"
+    },
+    "quick_stab": {
+      "name": "Estocada Rápida",
+      "description": "Ataque ágil com bônus de crítico.",
+      "type": "attack",
+      "cooldown": 2,
+      "multiplier": 1.35,
+      "critBonus": 0.2
+    },
+    "vanish": {
+      "name": "Desvanecer",
+      "description": "Aumenta muito a chance de esquiva no próximo turno.",
+      "type": "buff",
+      "cooldown": 3,
+      "effect": "evasion"
+    },
+    "arcane_bolt": {
+      "name": "Raio Arcano",
+      "description": "Ataque mágico que escala com intelecto.",
+      "type": "spell",
+      "cooldown": 2,
+      "multiplier": 1.7
+    },
+    "mana_ward": {
+      "name": "Barreira Arcana",
+      "description": "Metade do próximo dano e pequena cura.",
+      "type": "buff",
+      "cooldown": 3,
+      "effect": "ward"
+    }
+  },
+  "items": {
+    "pocao": {
+      "name": "Poção",
+      "type": "consumable",
+      "rarity": "common",
+      "price": 3,
+      "shop": true,
+      "description": "Recupera 4 HP.",
+      "usableOutsideCombat": true,
+      "usableInCombat": true,
+      "consumedOnUse": true,
+      "sellable": true,
+      "useEffects": {
+        "hp": 4
+      }
+    },
+    "pocao_maior": {
+      "name": "Poção Maior",
+      "type": "consumable",
+      "rarity": "uncommon",
+      "price": 7,
+      "shop": true,
+      "description": "Recupera 8 HP.",
+      "usableOutsideCombat": true,
+      "usableInCombat": true,
+      "consumedOnUse": true,
+      "sellable": true,
+      "useEffects": {
+        "hp": 8
+      }
+    },
+    "erva": {
+      "name": "Erva",
+      "type": "consumable",
+      "rarity": "common",
+      "price": 2,
+      "shop": true,
+      "description": "Recupera 2 HP. Também serve para rituais e improvisos botânicos.",
+      "usableOutsideCombat": true,
+      "usableInCombat": true,
+      "consumedOnUse": true,
+      "sellable": true,
+      "useEffects": {
+        "hp": 2
+      }
+    },
+    "tocha": {
+      "name": "Tocha",
+      "type": "utility",
+      "rarity": "common",
+      "price": 2,
+      "shop": true,
+      "description": "Necessária para iluminar áreas escuras.",
+      "sellable": true
+    },
+    "elixir_forca_i": {
+      "name": "Elixir de Força I",
+      "type": "consumable",
+      "rarity": "uncommon",
+      "price": 10,
+      "shop": true,
+      "description": "Uso único. +1 Força permanente.",
+      "usableOutsideCombat": true,
+      "usableInCombat": false,
+      "consumedOnUse": true,
+      "maxPurchases": 1,
+      "sellable": false,
+      "useEffects": {
+        "strength": 1
+      }
+    },
+    "elixir_forca_ii": {
+      "name": "Elixir de Força II",
+      "type": "consumable",
+      "rarity": "rare",
+      "price": 22,
+      "shop": true,
+      "description": "Uso único. +2 Força permanente.",
+      "usableOutsideCombat": true,
+      "usableInCombat": false,
+      "consumedOnUse": true,
+      "minLevel": 3,
+      "maxPurchases": 1,
+      "sellable": false,
+      "useEffects": {
+        "strength": 2
+      }
+    },
+    "elixir_vigor_i": {
+      "name": "Elixir de Vigor I",
+      "type": "consumable",
+      "rarity": "uncommon",
+      "price": 12,
+      "shop": true,
+      "description": "Uso único. +2 HP máximo permanente.",
+      "usableOutsideCombat": true,
+      "usableInCombat": false,
+      "consumedOnUse": true,
+      "maxPurchases": 1,
+      "sellable": false,
+      "useEffects": {
+        "maxHp": 2,
+        "hp": 2
+      }
+    },
+    "elixir_vigor_ii": {
+      "name": "Elixir de Vigor II",
+      "type": "consumable",
+      "rarity": "rare",
+      "price": 26,
+      "shop": true,
+      "description": "Uso único. +4 HP máximo permanente.",
+      "usableOutsideCombat": true,
+      "usableInCombat": false,
+      "consumedOnUse": true,
+      "minLevel": 4,
+      "maxPurchases": 1,
+      "sellable": false,
+      "useEffects": {
+        "maxHp": 4,
+        "hp": 4
+      }
+    },
+    "amuleto_salvaguarda": {
+      "name": "Amuleto da Salvaguarda",
+      "type": "special",
+      "rarity": "rare",
+      "price": 18,
+      "shop": true,
+      "description": "Se você morrer, ele é consumido e preserva ouro + inventário.",
+      "sellable": true
+    },
+    "espada_ferro": {
+      "name": "Espada de Ferro",
+      "type": "weapon",
+      "rarity": "common",
+      "price": 8,
+      "shop": true,
+      "description": "+1 Ataque.",
+      "attackBonus": 1,
+      "sellable": true
+    },
+    "lanca_cacador": {
+      "name": "Lança do Caçador",
+      "type": "weapon",
+      "rarity": "uncommon",
+      "price": 16,
+      "shop": true,
+      "description": "+2 Ataque.",
+      "attackBonus": 2,
+      "sellable": true
+    },
+    "lamina_runica": {
+      "name": "Lâmina Rúnica",
+      "type": "weapon",
+      "rarity": "epic",
+      "price": 32,
+      "shop": true,
+      "description": "+4 Ataque.",
+      "attackBonus": 4,
+      "minLevel": 4,
+      "sellable": true
+    },
+    "couro_reforcado": {
+      "name": "Couro Reforçado",
+      "type": "armor",
+      "rarity": "common",
+      "price": 10,
+      "shop": true,
+      "description": "+1 Defesa.",
+      "defenseBonus": 1,
+      "sellable": true
+    },
+    "cota_malha": {
+      "name": "Cota de Malha",
+      "type": "armor",
+      "rarity": "uncommon",
+      "price": 20,
+      "shop": true,
+      "description": "+2 Defesa.",
+      "defenseBonus": 2,
+      "sellable": true
+    },
+    "armadura_guardiao": {
+      "name": "Armadura do Guardião",
+      "type": "armor",
+      "rarity": "epic",
+      "price": 36,
+      "shop": true,
+      "description": "+4 Defesa.",
+      "defenseBonus": 4,
+      "minLevel": 4,
+      "sellable": true
+    },
+    "chave_runica": {
+      "name": "Chave Rúnica",
+      "type": "key",
+      "rarity": "rare",
+      "description": "Abre o portão das ruínas.",
+      "sellable": false
+    },
+    "tonico_heroico": {
+      "name": "Tônico Heroico",
+      "type": "consumable",
+      "rarity": "rare",
+      "price": 12,
+      "shop": true,
+      "description": "Recupera 12 HP. Tem gosto de vitória diluída em metal.",
+      "usableOutsideCombat": true,
+      "usableInCombat": true,
+      "consumedOnUse": true,
+      "sellable": true,
+      "useEffects": {
+        "hp": 12
+      }
+    },
+    "elixir_agilidade_i": {
+      "name": "Elixir de Agilidade I",
+      "type": "consumable",
+      "rarity": "rare",
+      "price": 14,
+      "shop": true,
+      "description": "Uso único. +1 Agilidade permanente.",
+      "usableOutsideCombat": true,
+      "usableInCombat": false,
+      "consumedOnUse": true,
+      "maxPurchases": 1,
+      "sellable": false,
+      "useEffects": {
+        "agility": 1
+      }
+    },
+    "elixir_mente_i": {
+      "name": "Elixir da Mente I",
+      "type": "consumable",
+      "rarity": "rare",
+      "price": 14,
+      "shop": true,
+      "description": "Uso único. +1 Intelecto permanente.",
+      "usableOutsideCombat": true,
+      "usableInCombat": false,
+      "consumedOnUse": true,
+      "maxPurchases": 1,
+      "sellable": false,
+      "useEffects": {
+        "intellect": 1
+      }
+    },
+    "tridente_mare": {
+      "name": "Tridente de Maré",
+      "type": "weapon",
+      "rarity": "rare",
+      "price": 46,
+      "shop": true,
+      "description": "+5 Ataque.",
+      "attackBonus": 5,
+      "minLevel": 5,
+      "sellable": true
+    },
+    "manto_abissal": {
+      "name": "Manto Abissal",
+      "type": "armor",
+      "rarity": "rare",
+      "price": 48,
+      "shop": true,
+      "description": "+5 Defesa.",
+      "defenseBonus": 5,
+      "minLevel": 5,
+      "sellable": true
+    },
+    "lamina_eclipse": {
+      "name": "Lâmina do Eclipse",
+      "type": "weapon",
+      "rarity": "epic",
+      "price": 78,
+      "shop": true,
+      "description": "+7 Ataque.",
+      "attackBonus": 7,
+      "minLevel": 7,
+      "sellable": true
+    },
+    "egide_eclipse": {
+      "name": "Égide do Eclipse",
+      "type": "armor",
+      "rarity": "epic",
+      "price": 82,
+      "shop": true,
+      "description": "+7 Defesa.",
+      "defenseBonus": 7,
+      "minLevel": 7,
+      "sellable": true
+    }
+  },
+  "enemies": {
+    "goblin_guard": {
+      "name": "Goblin Guardião",
+      "imageKey": "goblin-floresta",
+      "hp": 9,
+      "attackMin": 1,
+      "attackMax": 3,
+      "reward": {
+        "gold": 3,
+        "xp": 6,
+        "addItem": {
+          "chave_runica": 1
+        },
+        "setFlag": {
+          "goblinDefeated": true
+        }
+      },
+      "rewardText": "Você derrotou o goblin e encontrou moedas, XP e uma Chave Rúnica. Um expediente honesto.",
+      "allowFlee": true
+    },
+    "sentinel_wisp": {
+      "name": "GOBLIN",
+      "imageKey": "goblin-floresta",
+      "hp": 13,
+      "attackMin": 2,
+      "attackMax": 4,
+      "reward": {
+        "gold": 6,
+        "xp": 12,
+        "setFlag": {
+          "wispDefeated": true
+        }
+      },
+      "rewardText": "Você derrotou o goblin e encontrou moedas, XP . Um expediente honesto.",
+      "allowFlee": true
+    },
+    "tower_knight": {
+      "name": "Cavaleiro da Torre",
+      "imageKey": "cavaleiro-da-torre",
+      "hp": 18,
+      "attackMin": 3,
+      "attackMax": 5,
+      "reward": {
+        "gold": 10,
+        "xp": 18,
+        "setFlag": {
+          "towerKnightDefeated": true
+        }
+      },
+      "rewardText": "O cavaleiro cai. A armadura rangia com autoridade excessiva.",
+      "allowFlee": false
+    },
+    "deep_lurker": {
+      "name": "Espreitador Abissal",
+      "imageKey": "espreitador-abissal",
+      "hp": 20,
+      "attackMin": 3,
+      "attackMax": 5,
+      "reward": {
+        "gold": 12,
+        "xp": 20,
+        "setFlag": {
+          "deepLurkerDefeated": true
+        }
+      },
+      "rewardText": "A criatura afunda em água negra. Você recolhe ouro e aprende a respeitar poças suspeitas."
+    },
+    "mirror_priest": {
+      "name": "Sacerdote do Espelho",
+      "imageKey": "sacerdote-do-espelho",
+      "hp": 26,
+      "attackMin": 4,
+      "attackMax": 6,
+      "allowFlee": false,
+      "reward": {
+        "gold": 18,
+        "xp": 28,
+        "setFlag": {
+          "mirrorPriestDefeated": true
+        }
+      },
+      "rewardText": "O sacerdote racha como vidro encantado. Um som irritante, mas lucrativo."
+    },
+    "void_colossus": {
+      "name": "Colosso do Vazio",
+      "imageKey": "colosso-do-vazio",
+      "hp": 32,
+      "attackMin": 5,
+      "attackMax": 8,
+      "allowFlee": false,
+      "reward": {
+        "gold": 24,
+        "xp": 38,
+        "setFlag": {
+          "voidColossusDefeated": true
+        }
+      },
+      "rewardText": "O colosso desaba como uma muralha que perdeu a vontade de existir."
+    },
+    "eclipse_king": {
+      "name": "Rei do Eclipse",
+      "imageKey": "rei-do-eclipse", 
+      "hp": 42,
+      "attackMin": 6,
+      "attackMax": 10,
+      "allowFlee": false,
+      "reward": {
+        "gold": 400,
+        "xp": 505,
+        "setFlag": {
+          "eclipseKingDefeated": true
+        }
+      },
+      "rewardText": "O trono silencia. Finalmente, alguém teve a coragem de desligar essa monarquia cósmica."
+    }
+  }
+}

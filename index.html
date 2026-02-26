@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RPG de Texto AAA - UI Reforjada V2</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="panel hero">
+      <div class="hero-copy">
+        <p class="eyebrow">RPG DE TEXTO</p>
+        <h1>RPG de Texto com Escolhas</h1>
+        <p id="chapter-name" class="chapter-name">Carregando...</p>
+      </div>
+      <div class="hero-glow"></div>
+    </header>
+
+    <section id="menu-screen" class="panel menu-screen hidden">
+      <h2>Menu</h2>
+      <p id="menu-subtitle" class="small">
+        Escolha sua classe e comece um novo ciclo de decisões duvidosas e consequências perfeitamente injustas.
+      </p>
+
+      <div class="menu-actions">
+        <button id="new-game-btn">Novo Jogo</button>
+        <button id="continue-btn" class="alt">Continuar</button>
+      </div>
+
+      <div id="class-picker" class="class-picker hidden">
+        <h3>Escolha sua classe</h3>
+        <div id="class-options" class="class-options"></div>
+      </div>
+    </section>
+
+    <section id="game-screen" class="game-screen hidden">
+      <!-- HUD PRINCIPAL -->
+      <section class="panel hud-panel">
+        <div class="hud-top">
+          <div class="player-card">
+            <div class="avatar-orb" id="player-avatar">⚔️</div>
+            <div>
+              <h2 id="player-name">Herói Sem Nome</h2>
+              <p class="player-meta">
+                <span id="player-class">Aventureiro</span>
+                <span class="dot">•</span>
+                <span id="player-level">Nv.</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="hud-meta">
+            <div class="hud-chip gold">💰 <span id="player-gold">0 Ouro</span></div>
+            <div class="hud-chip quest">🎯 <span id="current-objective">Explorar a estrada antiga</span></div>
+          </div>
+        </div>
+
+        <div class="hud-bars">
+          <div class="meter-wrap">
+            <div class="meter-label">
+              <span>❤️ HP</span>
+              <strong id="hud-hp-text">100 / 100</strong>
+            </div>
+            <div class="meter hp">
+              <div id="hud-hp-fill" class="meter-fill" style="width: 100%"></div>
+            </div>
+          </div>
+
+          <div class="meter-wrap">
+            <div class="meter-label">
+              <span>🔷 Mana</span>
+              <strong id="hud-mana-text">30 / 30</strong>
+            </div>
+            <div class="meter mana">
+              <div id="hud-mana-fill" class="meter-fill" style="width: 100%"></div>
+            </div>
+          </div>
+
+          <div class="meter-wrap">
+            <div class="meter-label">
+              <span>✨ XP</span>
+              <strong id="hud-xp-text">0 / 100</strong>
+            </div>
+            <div class="meter xp">
+              <div id="hud-xp-fill" class="meter-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LAYOUT PRINCIPAL -->
+      <section id="game-shell" class="game-shell">
+        <!-- ESQUERDA -->
+        <aside class="left-rail">
+          <section class="panel side-panel">
+            <div class="section-head">
+              <h2>Status</h2>
+              <span class="badge">Herói</span>
+            </div>
+            <div id="stats" class="stack-list"></div>
+          </section>
+
+          <section class="panel side-panel">
+            <div class="section-head">
+              <h2>Equipado</h2>
+              <span class="badge">Ativo</span>
+            </div>
+            <div id="equipment" class="stack-list"></div>
+          </section>
+        </aside>
+
+        <!-- CENTRO -->
+      <main class="panel scene-panel">
+  <div class="scene-top">
+    <span class="scene-pill">Narrativa</span>
+    <h2 id="scene-title">Carregando...</h2>
+  </div>
+
+  <section id="scene-visual-wrap" class="scene-visual-wrap hidden">
+    <img id="scene-visual" class="scene-visual" src="" alt="Imagem da cena" />
+  </section>
+
+  <section id="combat-panel" class="combat-panel hidden" aria-live="polite">
+    ...
+  </section>
+
+  <section class="scene-body">
+    <p id="scene-text"></p>
+  </section>
+          <!-- PAINEL DE COMBATE -->
+          <section id="combat-panel" class="combat-panel hidden" aria-live="polite">
+            <div class="combat-head">
+              <div class="enemy-core">
+                <div class="enemy-orb">☠️</div>
+                <div>
+                  <h3 id="enemy-name">Inimigo</h3>
+                  <p class="enemy-meta">
+                    <span id="enemy-level">Nv.1</span>
+                    <span class="dot">•</span>
+                    <span id="enemy-intent">Preparando ataque</span>
+                  </p>
+                </div>
+              </div>
+              <span class="combat-badge">COMBATE</span>
+            </div>
+
+            <div class="meter-wrap compact">
+              <div class="meter-label">
+                <span>HP do inimigo</span>
+                <strong id="enemy-hp-text">30 / 30</strong>
+              </div>
+              <div class="meter enemy">
+                <div id="enemy-hp-fill" class="meter-fill" style="width: 100%"></div>
+              </div>
+            </div>
+
+            <div class="combat-actions">
+              <button id="combat-attack-btn" type="button">⚔️ Atacar</button>
+              <button id="combat-skill-btn" type="button" class="alt">✨ Skill</button>
+              <button id="combat-item-btn" type="button" class="alt">🧪 Item</button>
+              <button id="combat-flee-btn" type="button" class="warn">🏃 Fugir</button>
+            </div>
+          </section>
+
+          <section class="scene-body">
+            <p id="scene-text"></p>
+          </section>
+
+          <section class="choices-wrap">
+            <div class="choices-head">
+              <h3 class="choices-title">O que você faz agora?</h3>
+              <span class="shortcut-tip">Atalhos: 1–4, I, K, L, S</span>
+            </div>
+            <div id="choices" class="choices"></div>
+          </section>
+
+          <div id="quick-feedback" class="quick-feedback hidden"></div>
+        </main>
+
+        <!-- DIREITA -->
+        <aside class="right-rail">
+          <section class="panel utility-panel">
+            <div class="tab-bar" role="tablist" aria-label="Painéis secundários">
+              <button class="tab-btn active" data-tab="tab-inventory" type="button">🎒 Inventário</button>
+              <button class="tab-btn" data-tab="tab-skills" type="button">✨ Habilidades</button>
+              <button class="tab-btn" data-tab="tab-log" type="button">📜 Registro</button>
+            </div>
+
+            <div class="tab-content">
+              <div id="tab-inventory" class="tab-pane active">
+                <div id="inventory" class="inventory-list"></div>
+              </div>
+
+              <div id="tab-skills" class="tab-pane">
+                <div id="skills" class="skills-list"></div>
+              </div>
+
+              <div id="tab-log" class="tab-pane">
+                <div id="log" class="log"></div>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </section>
+    </section>
+
+    <footer class="panel footer-actions">
+      <button id="save-btn">Salvar</button>
+      <button id="load-btn">Carregar</button>
+      <button id="menu-btn" class="alt">Menu</button>
+      <button id="restart-btn" class="warn">Reinício Total</button>
+    </footer>
+
+    <div id="toast-stack" class="toast-stack" aria-live="polite"></div>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

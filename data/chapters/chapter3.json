@@ -1,0 +1,137 @@
+{
+  "chapter": {
+    "id": "cap3",
+    "title": "Capítulo 3 — A Cripta Submersa"
+  },
+  "scenes": {
+    "flooded_approach": {
+      "chapter": "cap3",
+      "checkpoint": true,
+      "title": "Acesso à Cripta",
+      "text": "Uma escadaria secreta desce sob a torre até uma galeria úmida. O som da água ecoa como se o lugar respirasse com desgosto.",
+      "onEnter": {
+        "text": "Você entrou em um novo capítulo. Agora a umidade também quer te matar."
+      },
+      "choices": [
+        {
+          "text": "Visitar o acampamento do contrabandista",
+          "next": "smuggler_camp"
+        },
+        {
+          "text": "Explorar a galeria alagada",
+          "next": "flooded_hall"
+        },
+        {
+          "text": "Voltar para a torre",
+          "next": "tower_path"
+        }
+      ]
+    },
+    "smuggler_camp": {
+      "chapter": "cap3",
+      "title": "Acampamento do Contrabandista",
+      "text": "Um comerciante clandestino montou loja entre barris encharcados. Ele cobra caro, mas pelo menos admite que está cobrando caro.",
+      "shop": {
+        "items": [
+          "tonico_heroico",
+          "elixir_agilidade_i",
+          "elixir_mente_i",
+          "tridente_mare",
+          "manto_abissal",
+          "amuleto_salvaguarda"
+        ],
+        "returnScene": "flooded_approach"
+      }
+    },
+    "flooded_hall": {
+      "chapter": "cap3",
+      "title": "Galeria Alagada",
+      "text": "A água sobe até os joelhos. Algo se move abaixo da superfície com uma confiança desconfortável.",
+      "choices": [
+        {
+          "text": "Avançar pela água escura",
+          "requires": {
+            "flagFalse": "deepLurkerDefeated"
+          },
+          "combat": {
+            "enemyId": "deep_lurker",
+            "victoryNext": "sunken_sanctum"
+          }
+        },
+        {
+          "text": "Seguir para o santuário afundado",
+          "requires": {
+            "flag": "deepLurkerDefeated"
+          },
+          "next": "sunken_sanctum"
+        },
+        {
+          "text": "Recuar para a entrada",
+          "next": "flooded_approach"
+        }
+      ]
+    },
+    "sunken_sanctum": {
+      "chapter": "cap3",
+      "title": "Santuário Afundado",
+      "text": "Colunas rachadas sustentam um teto impossível. No centro, um altar espelhado devolve seu reflexo com ligeiro desprezo.",
+      "choices": [
+        {
+          "text": "Tocar o altar espelhado",
+          "requires": {
+            "flagFalse": "mirrorPriestDefeated"
+          },
+          "combat": {
+            "enemyId": "mirror_priest",
+            "victoryNext": "abyssal_vault"
+          }
+        },
+        {
+          "text": "Abrir a passagem secreta do altar",
+          "requires": {
+            "flag": "mirrorPriestDefeated"
+          },
+          "next": "abyssal_vault"
+        },
+        {
+          "text": "Voltar para a galeria",
+          "next": "flooded_hall"
+        }
+      ]
+    },
+    "abyssal_vault": {
+      "chapter": "cap3",
+      "checkpoint": true,
+      "title": "Câmara do Fragmento",
+      "text": "Atrás do altar, um cofre antigo guarda um fragmento negro que pulsa em sintonia com o cristal de Eryndor. Péssimo sinal. Ótimo loot.",
+      "choices": [
+        {
+          "text": "Tomar o Fragmento Abissal",
+          "requires": {
+            "flagFalse": "abyssShardTaken"
+          },
+          "effects": {
+            "gold": 8,
+            "xp": 10,
+            "setFlag": {
+              "abyssShardTaken": true
+            }
+          },
+          "resultText": "Você garantiu o Fragmento Abissal e arrancou algumas moedas do cofre.",
+          "next": "abyssal_vault"
+        },
+        {
+          "text": "Seguir pela ponte negra",
+          "requires": {
+            "flag": "abyssShardTaken"
+          },
+          "next": "eclipse_bridge"
+        },
+        {
+          "text": "Voltar ao santuário",
+          "next": "sunken_sanctum"
+        }
+      ]
+    }
+  }
+}

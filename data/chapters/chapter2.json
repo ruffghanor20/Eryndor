@@ -1,0 +1,115 @@
+{
+  "chapter": {
+    "id": "cap2",
+    "title": "Capítulo 2 — A Torre do Vigia"
+  },
+  "scenes": {
+    "tower_path": {
+      "chapter": "cap2",
+      "checkpoint": true,
+      "title": "Caminho para a Torre",
+      "text": "Com o altar purificado, uma passagem secreta leva à antiga torre do vigia. O ar fica mais frio e o jogo claramente espera mais de você agora.",
+      "onEnter": {
+        "text": "Você entrou em um novo capítulo. Naturalmente, os inimigos vão tentar argumentar com violência."
+      },
+      "choices": [
+        {
+          "text": "Subir até a torre",
+          "next": "tower_hall"
+        },
+        {
+          "text": "Descansar antes de seguir",
+          "effects": {
+            "hp": 2
+          },
+          "resultText": "Você recuperou parte das forças.",
+          "next": "tower_path"
+        },
+        {
+          "text": "Voltar para as ruínas",
+          "next": "inner_shrine"
+        }
+      ]
+    },
+    "tower_hall": {
+      "chapter": "cap2",
+      "title": "Salão da Torre",
+      "text": "Uma sentinela etérea desperta no topo da escadaria e desliza na sua direção com o entusiasmo de quem odeia visitantes.",
+      "choices": [
+        {
+          "text": "Enfrentar a sentinela",
+          "requires": {
+            "flagFalse": "wispDefeated"
+          },
+          "combat": {
+            "enemyId": "sentinel_wisp",
+            "victoryNext": "tower_core"
+          }
+        },
+        {
+          "text": "Avançar para o núcleo da torre",
+          "requires": {
+            "flag": "wispDefeated"
+          },
+          "next": "tower_core"
+        },
+        {
+          "text": "Recuar",
+          "next": "tower_path"
+        }
+      ]
+    },
+    "tower_core": {
+      "chapter": "cap2",
+      "title": "Núcleo da Torre",
+      "text": "No topo, o guardião final aguarda entre mecanismos antigos e luz azul rachada. Nada disso parece amigável ou econômico.",
+      "choices": [
+        {
+          "text": "Desafiar o Cavaleiro da Torre",
+          "requires": {
+            "flagFalse": "towerKnightDefeated"
+          },
+          "combat": {
+            "enemyId": "tower_knight",
+            "victoryNext": "ending_scholar"
+          }
+        },
+        {
+          "text": "Reivindicar a torre estabilizada",
+          "requires": {
+            "flag": "towerKnightDefeated"
+          },
+          "next": "ending_scholar"
+        },
+        {
+          "text": "Voltar ao salão",
+          "next": "tower_hall"
+        }
+      ]
+    },
+    "ending_scholar": {
+      "chapter": "cap2",
+      "title": "Conclusão Parcial: Torre Estabilizada",
+      "text": "No topo da torre, você encontra registros antigos e entende como estabilizar o vale. Entre os mapas, surge a próxima desgraça: uma cripta submersa onde um Fragmento do Eclipse foi selado. Excelente. O mundo realmente odeia folga.",
+      "onEnter": {
+        "effects": {
+          "gold": 20,
+          "xp": 12,
+          "hp": 2,
+          "strength": 1
+        },
+        "text": "Você foi recompensado com ouro, XP e reconhecimento. Uma raridade administrativa."
+      },
+      "choices": [
+        {
+          "text": "Seguir para a Cripta Submersa",
+          "next": "flooded_approach"
+        },
+        {
+          "text": "Voltar ao mercado e se preparar melhor",
+          "next": "market_square"
+        }
+      ]
+    }
+  }
+}
