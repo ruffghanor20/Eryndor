@@ -1,6 +1,6 @@
 # Eryndor
 RPG de texto em HTML/CSS/JS com narrativa interativa, combate por turnos, classes, inventário, múltiplos capítulos, trilha sonora dinâmica e empacotamento Android via Capacitor.
-# RPG de Texto AAA-ish — Versão 4
+# RPG de Texto 
 
 ## Recursos
 - Menu inicial com **Novo Jogo** e **Continuar**
