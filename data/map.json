@@ -1,0 +1,47 @@
+{
+  "eryndor_city": {
+    "name": "Cidade de Eryndor",
+    "type": "city",
+    "connections": [
+      "forest_path",
+      "valemont",
+      "lunaris"
+    ]
+  },
+
+  "forest_path": {
+    "name": "Floresta Antiga",
+    "type": "forest",
+    "connections": [
+      "eryndor_city",
+      "ruins",
+      "greenfall"
+    ],
+    "danger": 2
+  },
+
+  "ruins": {
+    "name": "Ruínas de Eryndor",
+    "type": "dungeon",
+    "connections": ["forest_path"],
+    "danger": 3
+  },
+
+  "greenfall": {
+    "name": "Vila Greenfall",
+    "type": "village",
+    "connections": ["forest_path"]
+  },
+
+  "valemont": {
+    "name": "Cidade de Valemont",
+    "type": "city",
+    "connections": ["eryndor_city"]
+  },
+
+  "lunaris": {
+    "name": "Cidade de Lunaris",
+    "type": "city",
+    "connections": ["eryndor_city"]
+  }
+}
